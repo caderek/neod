@@ -1,0 +1,10 @@
+node_modules
+lib
+temp
+*.temp.*
+*/**/*.temp.*
+*.log
+*/**/*.log
+.idea
+.vscode
+aoc*

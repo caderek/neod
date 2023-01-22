@@ -1,0 +1,42 @@
+{
+  "name": "neod",
+  "version": "0.2.0",
+  "repository": "https://github.com/caderek/neod",
+  "description": "Dead simple Node runner and builder",
+  "main": "lib/index.js",
+  "bin": "lib/cli.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build.js --watch",
+    "build": "node scripts/build.js",
+    "format": "prettier -w src",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "runner",
+    "builder",
+    "template"
+  ],
+  "author": "Maciej Caderek",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/common-tags": "^1.8.1",
+    "@types/node": "^18.11.10",
+    "@types/prompts": "^2.4.1",
+    "prettier": "^2.8.0",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "common-tags": "^1.8.2",
+    "dotenv": "^16.0.3",
+    "esbuild": "^0.15.16",
+    "kleur": "^4.1.5",
+    "prompts": "^2.4.2",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.3"
+  },
+  "engines": {
+    "node": ">=16.13.0"
+  }
+}
