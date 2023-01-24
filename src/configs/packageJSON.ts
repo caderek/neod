@@ -2,7 +2,7 @@ import type { Setup } from "../types/common"
 import version from "../version.js"
 
 const packageJSON = ({ name, description, language, author }: Setup) => {
-  const build = language === "ts" ? { build: "aocrunner build" } : {}
+  const build = language === "ts" ? { build: "neod build" } : {}
 
   return {
     name,
@@ -10,19 +10,14 @@ const packageJSON = ({ name, description, language, author }: Setup) => {
     description,
     type: "module",
     scripts: {
-      start: "aocrunner day",
+      start: "neod start",
       ...build,
       format: "prettier -w src",
-      "update:readme": "aocrunner update:readme",
     },
     keywords: ["aoc"],
     author: author ?? "",
     license: "ISC",
-    devDependencies: {
-      "@types/node": "^16.11.6",
-      aocrunner: `^${version}`,
-      prettier: "^2.8.0",
-    },
+    devDependencies: {},
     dependencies: {},
     engines: {
       node: ">=16.13.0",

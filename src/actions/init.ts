@@ -13,6 +13,8 @@ import gitignoreTXT from "../configs/gitignoreTXT.js"
 import prettierignoreTXT from "../configs/prettierignoreTXT.js"
 import envTXT from "../configs/envTXT.js"
 import readmeMD from "../configs/readmeMD.js"
+import installDependencies from "./processes/installDependencies.js"
+import formatCode from "./processes/formatCode.js"
 
 import type { Setup } from "../types/common"
 
@@ -50,7 +52,7 @@ const init = async () => {
   const srcDir = path.join(dir, "src")
 
   if (fs.existsSync(dir)) {
-    console.log("Project already exists. Aborted.")
+    console.log(kleur.red("Project already exists. Aborted."))
     process.exit(1)
   }
 
@@ -77,13 +79,13 @@ const init = async () => {
 
   copy(templatesDir, srcDir)
 
-  console.log("\nInstalling dependencies...\n")
-  execSync(installCmd, { cwd: dir, stdio: "inherit" })
+  console.log(kleur.magenta("\nInstalling dependencies...\n"))
+  installDependencies(setup)
 
-  console.log("\nFormatting the source files...\n")
-  execSync(formatCmd, { cwd: dir, stdio: "inherit" })
+  console.log(kleur.magenta("\nFormatting the source files...\n"))
+  formatCode(setup)
 
-  console.log("\nInitializing Git repository...\n")
+  console.log(kleur.magenta("\nInitializing Git repository...\n"))
   for (const command of gitCommands) {
     execSync(command, { cwd: dir, stdio: "inherit" })
   }

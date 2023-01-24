@@ -32,7 +32,6 @@ const initPrompt = () => {
         choices: [
           { title: "Application", value: "app" },
           { title: "Library", value: "lib" },
-          { title: "Script", value: "script" },
         ],
         initial: 0,
       },
@@ -66,6 +65,15 @@ const initPrompt = () => {
         message: `Description`,
         initial: "",
       },
+      {
+        type: (_, values) => (values.type === "app" ? "toggle" : null),
+        name: "includeEnv",
+        message: `Setup .env file`,
+        initial: true,
+        active: "yes",
+        inactive: "no",
+      },
+
       {
         type: "select",
         name: "packageManager",
