@@ -1,5 +1,4 @@
 import type { Setup } from "../types/common"
-import version from "../version.js"
 
 const packageJSON = ({ name, description, language, author }: Setup) => {
   const build = language === "ts" ? { build: "neod build" } : {}
@@ -10,9 +9,9 @@ const packageJSON = ({ name, description, language, author }: Setup) => {
     description,
     type: "module",
     scripts: {
-      start: "neod start",
+      start: "neod dev",
       ...build,
-      format: "prettier -w src",
+      format: "neod format",
     },
     keywords: ["aoc"],
     author: author ?? "",

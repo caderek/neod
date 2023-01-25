@@ -14,7 +14,7 @@ import prettierignoreTXT from "../configs/prettierignoreTXT.js"
 import envTXT from "../configs/envTXT.js"
 import readmeMD from "../configs/readmeMD.js"
 import installDependencies from "./processes/installDependencies.js"
-import formatCode from "./processes/formatCode.js"
+import format from "./format.js"
 
 import type { Setup } from "../types/common"
 
@@ -83,7 +83,7 @@ const init = async () => {
   installDependencies(setup)
 
   console.log(kleur.magenta("\nFormatting the source files...\n"))
-  formatCode(setup)
+  format(setup)
 
   console.log(kleur.magenta("\nInitializing Git repository...\n"))
   for (const command of gitCommands) {

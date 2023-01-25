@@ -1,6 +1,6 @@
 {
   "name": "neod",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "repository": "https://github.com/caderek/neod",
   "description": "Dead simple Node runner and builder",
   "main": "lib/index.js",

@@ -3,6 +3,7 @@ import init from "./actions/init.js"
 import dev from "./actions/dev.js"
 import build from "./actions/build.js"
 import updateReadme from "./actions/updateReadMe.js"
+import format from "./actions/format.js"
 import dotenv from "dotenv"
 import version from "./version.js"
 
@@ -28,7 +29,7 @@ switch (String(command || "").toLowerCase()) {
     init()
     break
   }
-  case "day": {
+  case "dev": {
     dev(args[0])
     break
   }
@@ -36,9 +37,13 @@ switch (String(command || "").toLowerCase()) {
     build()
     break
   }
+  case "format": {
+    format()
+    break
+  }
   case "update:readme": {
     updateReadme()
-    break;
+    break
   }
   default: {
     console.log("Command not supported")
