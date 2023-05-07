@@ -1,9 +1,8 @@
 {
   "name": "neod",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": "https://github.com/caderek/neod",
   "description": "Dead simple Node runner and builder",
-  "main": "lib/index.js",
   "bin": "lib/cli.js",
   "type": "module",
   "scripts": {

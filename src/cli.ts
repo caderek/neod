@@ -10,7 +10,7 @@ import version from "./version.js"
 dotenv.config()
 
 const commandPos = process.argv.findIndex((arg) =>
-  ["init", "day", "build", "update:readme"].includes(arg),
+  ["-v", "init", "dev", "build", "format", "update:readme"].includes(arg),
 )
 
 if (commandPos === -1) {
@@ -18,7 +18,9 @@ if (commandPos === -1) {
   process.exit(1)
 }
 
-const [command, ...args] = process.argv.slice(commandPos)
+const [command, ...rawArgs] = process.argv.slice(commandPos)
+const isTS = rawArgs.includes("--ts")
+const args = rawArgs.filter((arg) => arg !== "--ts")
 
 switch (String(command || "").toLowerCase()) {
   case "-v": {
@@ -30,7 +32,7 @@ switch (String(command || "").toLowerCase()) {
     break
   }
   case "dev": {
-    dev(args[0])
+    dev({ entryFile: args[0], isTS })
     break
   }
   case "build": {

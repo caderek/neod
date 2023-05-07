@@ -2,6 +2,7 @@ import type { Setup } from "../types/common"
 
 const packageJSON = ({ name, description, language, author }: Setup) => {
   const build = language === "ts" ? { build: "neod build" } : {}
+  const start = { start: language === "ts" ? "neod dev --ts" : "neod dev" }
 
   return {
     name,
@@ -9,7 +10,7 @@ const packageJSON = ({ name, description, language, author }: Setup) => {
     description,
     type: "module",
     scripts: {
-      start: "neod dev",
+      ...start,
       ...build,
       format: "neod format",
     },

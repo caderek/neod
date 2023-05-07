@@ -29,10 +29,8 @@ const showFullInfo = () => {
 
   console.log()
   console.log(stripIndent`
-    AoC Runner v${version} ${updateInfo}
+    Neod v${version} ${updateInfo}
 
-    Type ${boldMagenta("fetch")} or ${boldMagenta("f")} - to fetch the input
-    Type ${boldMagenta("send")}  or ${boldMagenta("s")} - to send the solutions
     Type ${boldMagenta("help")}  or ${boldMagenta("h")} - to show all commands
     Type ${boldMagenta("clear")} or ${boldMagenta("c")} - to clear the console
     Type ${boldMagenta("quit")}  or ${boldMagenta("q")} - to close the runner
@@ -43,9 +41,9 @@ const showFullInfo = () => {
 const showInfo = () => {
   console.log()
   console.log(stripIndent`
-    Type: ${boldMagenta("f")} - fetch input, ${boldMagenta(
-    "s",
-  )} - send solutions, ${boldMagenta("h")} - help,  ${boldMagenta("q")} - quit
+    Type: ${boldMagenta("h")} - help,  ${boldMagenta(
+    "q",
+  )} - quit, ${boldMagenta("c")} - clear
   `)
 
   if (latestVersion !== null && latestVersion !== version) {
@@ -54,24 +52,29 @@ const showInfo = () => {
 
     console.log(
       `To update, close the runner and run`,
-      kleur.bold().green("npm i aocrunner"),
+      kleur.bold().green("npm i neod"),
     )
   }
 
   console.log()
 }
 
-const dev = (entryFile?: string) => {
-  const config = { language: "TS" }
+type DevParams = {
+  entryFile: string | undefined
+  isTS: boolean
+}
 
+const dev = ({ entryFile, isTS }: DevParams) => {
   const files = getAllFiles("src")
-  const file = entryFile ?? "dev/index.js"
 
-  if (config.language === "ts") {
+  // @todo Handle arbitrary files
+  const entry = entryFile ?? (isTS ? "dist/index.js" : "src/index.js")
+
+  if (isTS) {
     buildSource(files)
   }
 
-  runCode(file)
+  runCode(entry)
 
   const reload = (file: string) => {
     if (![".js", ".ts", ".mjs"].includes(path.parse(file).ext)) {
@@ -80,11 +83,11 @@ const dev = (entryFile?: string) => {
 
     console.clear()
 
-    if (config.language === "ts") {
+    if (isTS) {
       buildSource(file)
     }
 
-    runCode(file)
+    runCode(entry)
     showInfo()
 
     process.stdout.write(kleur.cyan("?") + kleur.gray("  › "))
